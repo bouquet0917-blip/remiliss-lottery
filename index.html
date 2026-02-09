@@ -1,182 +1,604 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2026年 新年運試し抽選｜ReMiliss</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2026年の始まりの運試し！｜ReMiliss</title>
+  <meta name="description" content="2026年初回の特別キャンペーン。1人1回限定のプレミアム抽選。" />
 
-<style>
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
-  background:#0b0f14;
-  color:#e9eef6;
-}
-.wrap{max-width:680px;margin:40px auto;padding:0 20px}
-h1{font-size:26px;text-align:center;letter-spacing:.08em}
-.card{
-  background:#111824;
-  border-radius:16px;
-  padding:24px;
-  margin-top:24px;
-}
-label{display:block;margin-top:16px;font-size:13px;color:#a8b3c2}
-input{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #333;
-  background:#0e141f;
-  color:#fff;
-  margin-top:6px;
-}
-button{
-  width:100%;
-  margin-top:24px;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(180deg,#f0d28a,#d7b46a);
-  font-weight:bold;
-  letter-spacing:.1em;
-}
-.note{margin-top:12px;font-size:12px;color:#a8b3c2;text-align:center}
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#111824;
+      --panel2:#0e141f;
+      --text:#e9eef6;
+      --muted:#a8b3c2;
+      --line:rgba(255,255,255,.10);
+      --gold:#d7b46a;
+      --gold2:#f0d28a;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max:1080px;
+    }
 
-/* ===== 当選モーダル ===== */
-.winModal{
-  position:fixed;inset:0;
-  display:none;
-  place-items:center;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(6px);
-}
-.winModal.show{display:grid}
-.winBox{
-  background:#111824;
-  border-radius:20px;
-  padding:32px;
-  text-align:center;
-  width:90%;max-width:420px;
-  position:relative;
-}
-.winBox::before{
-  content:"";
-  position:absolute;inset:-2px;
-  border-radius:22px;
-  background:radial-gradient(circle,#f0d28a33,transparent 60%);
-}
-.winPrize{font-size:22px;font-weight:bold;letter-spacing:.1em}
-.winText{margin-top:10px;font-size:14px;color:#d7b46a}
-.closeBtn{
-  margin-top:20px;
-  background:none;
-  border:1px solid #555;
-  color:#fff;
-  padding:10px 20px;
-  border-radius:20px;
-}
-</style>
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(215,180,106,.18), transparent 55%),
+        radial-gradient(900px 520px at 90% 20%, rgba(240,210,138,.12), transparent 60%),
+        radial-gradient(900px 520px at 40% 95%, rgba(120,160,255,.10), transparent 60%),
+        linear-gradient(180deg, #070a0f 0%, var(--bg) 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+      letter-spacing:.02em;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
+
+    /* top bar */
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(11,15,20,.92), rgba(11,15,20,.55));
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
+    }
+    .brand{ display:flex; gap:12px; align-items:center; }
+    .mark{
+      width:34px; height:34px; border-radius:999px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(240,210,138,.9), rgba(215,180,106,.35) 45%, rgba(215,180,106,.12) 70%, transparent 72%),
+        linear-gradient(135deg, rgba(215,180,106,.65), rgba(240,210,138,.18));
+      box-shadow: 0 10px 30px rgba(215,180,106,.15);
+      border: 1px solid rgba(215,180,106,.35);
+    }
+    .brand .name{ font-weight:800; letter-spacing:.10em; }
+    .brand .sub{ display:block; font-size:12px; color:var(--muted); letter-spacing:.12em; margin-top:2px; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border: 1px solid rgba(215,180,106,.35);
+      background: rgba(17,24,36,.55);
+      color: var(--gold2);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:6px; height:6px; border-radius:999px;
+      background: var(--gold2);
+      box-shadow: 0 0 18px rgba(240,210,138,.65);
+    }
+
+    /* hero */
+    header.hero{ padding:54px 0 18px; }
+    .heroCard{
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(17,24,36,.82), rgba(14,20,31,.72));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .heroCard::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(800px 320px at 30% 0%, rgba(240,210,138,.22), transparent 60%),
+        radial-gradient(600px 260px at 80% 15%, rgba(215,180,106,.18), transparent 55%);
+      pointer-events:none;
+    }
+    .heroInner{
+      position:relative;
+      padding:32px 28px 26px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width:860px){ .heroInner{ grid-template-columns:1fr; } }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color: var(--gold2);
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+    .kicker span{
+      height:1px; width:44px;
+      background: linear-gradient(90deg, rgba(215,180,106,.0), rgba(240,210,138,.75));
+    }
+    h1{
+      margin:0 0 10px;
+      font-family: ui-serif, "Times New Roman", "Noto Serif JP", serif;
+      font-weight:800;
+      letter-spacing:.08em;
+      line-height:1.2;
+      font-size: clamp(26px, 3.2vw, 40px);
+    }
+    .lead{
+      margin:0;
+      color: rgba(233,238,246,.86);
+      line-height:1.85;
+      font-size:14px;
+      max-width: 62ch;
+    }
+    .metaRow{
+      display:flex; flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+    .chip{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(11,15,20,.35);
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:12px;
+      color: var(--muted);
+    }
+    .chip b{ color: var(--text); font-weight:800; }
+
+    .ctaBox{
+      position:relative;
+      border-radius: var(--radius);
+      border:1px solid rgba(215,180,106,.30);
+      background: linear-gradient(180deg, rgba(215,180,106,.12), rgba(11,15,20,.35));
+      padding:18px;
+      overflow:hidden;
+    }
+    .ctaBox::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(340px 180px at 30% 20%, rgba(240,210,138,.26), transparent 60%);
+      pointer-events:none;
+    }
+    .ctaBox h2{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.14em;
+      color: var(--gold2);
+      position:relative;
+    }
+    .ctaBox p{
+      margin:0 0 12px;
+      font-size:12px;
+      line-height:1.7;
+      color: rgba(233,238,246,.78);
+      position:relative;
+    }
+    .ctaActions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      position:relative;
+    }
+    .btn{
+      cursor:pointer;
+      border-radius:12px;
+      padding:11px 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(17,24,36,.55);
+      color: var(--text);
+      font-weight:800;
+      letter-spacing:.06em;
+      font-size:13px;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(240,210,138,.35); }
+    .btnPrimary{
+      border-color: rgba(240,210,138,.55);
+      background: linear-gradient(180deg, rgba(240,210,138,.22), rgba(215,180,106,.10));
+    }
+    .btnGhost{ background: transparent; }
+
+    section{ padding: 18px 0 26px; }
+
+    /* prize table */
+    .prizeWrap{
+      border-radius: var(--radius2);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(17,24,36,.78), rgba(14,20,31,.62));
+      box-shadow: var(--shadow);
+    }
+    .prizeHead{
+      padding:18px 18px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
+    }
+    .prizeHead h2{
+      margin:0;
+      font-family: ui-serif, "Times New Roman", "Noto Serif JP", serif;
+      letter-spacing:.10em;
+      font-size:18px;
+    }
+    .prizeHead .note{ font-size:12px; color: var(--muted); }
+
+    .prizeGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:1px;
+      background: rgba(255,255,255,.06);
+    }
+    @media (max-width:980px){ .prizeGrid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:640px){ .prizeGrid{ grid-template-columns: 1fr; } }
+
+    .prize{
+      background: rgba(11,15,20,.38);
+      padding:16px 16px 14px;
+      position:relative;
+      min-height: 138px;
+    }
+    .prize::before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(340px 180px at 20% 0%, rgba(240,210,138,.10), transparent 60%);
+      pointer-events:none;
+      opacity:.85;
+    }
+    .prizeTop{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      position:relative;
+    }
+    .rank{
+      display:inline-flex; align-items:center; gap:10px;
+      font-weight:900;
+      letter-spacing:.16em;
+      font-size:13px;
+    }
+    .rankBadge{
+      width:30px; height:30px;
+      display:grid; place-items:center;
+      border-radius:10px;
+      border:1px solid rgba(215,180,106,.40);
+      background: linear-gradient(180deg, rgba(240,210,138,.16), rgba(215,180,106,.08));
+      color: var(--gold2);
+      box-shadow: 0 10px 26px rgba(215,180,106,.12);
+      font-family: ui-serif, "Times New Roman", serif;
+      letter-spacing:.08em;
+    }
+    .qty{
+      font-size:12px;
+      color: var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(17,24,36,.35);
+      position:relative;
+      white-space:nowrap;
+    }
+    .prizeBody{ margin-top:10px; position:relative; }
+    .prizeTitle{ margin:0 0 6px; font-weight:900; letter-spacing:.06em; font-size:14px; }
+    .prizeDesc{ margin:0; color: rgba(233,238,246,.78); font-size:12px; line-height:1.8; }
+
+    /* emphasis */
+    .prize.is-top{
+      background: linear-gradient(180deg, rgba(240,210,138,.10), rgba(11,15,20,.38));
+    }
+    .prize.is-top .rankBadge{
+      width:34px; height:34px;
+      border-radius:12px;
+      box-shadow: 0 18px 40px rgba(240,210,138,.18);
+    }
+    .prize.is-top .prizeTitle{ font-size:15px; }
+    .prize.is-top::before{
+      background:
+        radial-gradient(460px 220px at 20% 0%, rgba(240,210,138,.22), transparent 62%),
+        radial-gradient(380px 200px at 70% 10%, rgba(215,180,106,.16), transparent 60%);
+      opacity:1;
+    }
+
+    .prize.is-i{
+      background: rgba(11,15,20,.28);
+      opacity:.92;
+    }
+    .prize.is-i .rankBadge{
+      border-color: rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(233,238,246,.75);
+      box-shadow:none;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-weight:800;
+    }
+    .prize.is-i .prizeTitle{ font-weight:800; }
+    .prize.is-i .prizeDesc{ color: rgba(233,238,246,.70); }
+
+    /* entry */
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+    @media (max-width:860px){ .grid2{ grid-template-columns:1fr; } }
+
+    .card{
+      background: linear-gradient(180deg, rgba(17,24,36,.72), rgba(14,20,31,.62));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 14px 46px rgba(0,0,0,.32);
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.14em;
+      color: var(--gold2);
+    }
+    .card p, .card li{
+      color: rgba(233,238,246,.84);
+      font-size:13px;
+      line-height:1.85;
+    }
+    .fine{ font-size:11px; color: rgba(168,179,194,.90); line-height:1.7; }
+    .divider{ height:1px; background: rgba(255,255,255,.08); margin: 12px 0; }
+
+    .form{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+    label{
+      display:grid;
+      gap:6px;
+      font-size:12px;
+      color: var(--muted);
+      letter-spacing:.08em;
+    }
+    input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(11,15,20,.45);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    input:focus{
+      border-color: rgba(240,210,138,.45);
+      box-shadow: 0 0 0 4px rgba(240,210,138,.10);
+    }
+
+    footer{
+      padding: 28px 0 44px;
+      color: rgba(168,179,194,.88);
+      font-size:12px;
+      line-height:1.8;
+    }
+    .footRow{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:16px;
+    }
+
+    /* ====== RESULT MODAL + RING EFFECT ====== */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      place-items:center;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      z-index:999;
+      padding:18px;
+    }
+    .modal.show{ display:grid; }
+
+    .modalCard{
+      width:min(560px, 100%);
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(17,24,36,.92), rgba(14,20,31,.82));
+      box-shadow: 0 26px 80px rgba(0,0,0,.55);
+      position:relative;
+      overflow:hidden;
+    }
+    .modalCard::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 260px at 30% 0%, rgba(240,210,138,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 12%, rgba(215,180,106,.16), transparent 58%);
+      pointer-events:none;
+    }
+    .modalInner{
+      position:relative;
+      padding:22px 20px 18px;
+    }
+    .modalTop{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px;
+      padding-bottom:14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .badgeBig{
+      display:inline-flex; align-items:center; gap:10px;
+      border-radius:999px;
+      padding:10px 12px;
+      border:1px solid rgba(240,210,138,.35);
+      background: rgba(11,15,20,.30);
+      color: var(--gold2);
+      font-weight:900;
+      letter-spacing:.14em;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .badgeBig .b{
+      width:34px; height:34px;
+      display:grid; place-items:center;
+      border-radius:12px;
+      border:1px solid rgba(240,210,138,.45);
+      background: linear-gradient(180deg, rgba(240,210,138,.18), rgba(215,180,106,.10));
+      box-shadow: 0 16px 36px rgba(240,210,138,.14);
+      font-family: ui-serif, "Times New Roman", serif;
+      font-size:16px;
+      letter-spacing:.06em;
+    }
+    .badgeBig.is-top .b{
+      width:42px; height:42px;
+      border-radius:14px;
+      box-shadow: 0 24px 60px rgba(240,210,138,.22);
+    }
+
+    .modalTitle{
+      margin:10px 0 6px;
+      font-family: ui-serif, "Times New Roman", "Noto Serif JP", serif;
+      font-weight:900;
+      letter-spacing:.10em;
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height:1.3;
+    }
+    .modalDesc{
+      margin:0;
+      color: rgba(233,238,246,.82);
+      font-size:13px;
+      line-height:1.9;
+    }
+    .modalActions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding:16px 20px 20px;
+      position:relative;
+    }
+    .modalActions .btn{ width:100%; text-align:center; }
+
+    /* Ring overlay (light rings) */
+    .ringStage{
+      position:relative;
+      min-height: 220px;
+      display:grid;
+      place-items:center;
+      padding:18px 0 6px;
+    }
+    .ringCore{
+      width: 10px; height: 10px;
+      border-radius:999px;
+      background: rgba(240,210,138,.95);
+      box-shadow: 0 0 30px rgba(240,210,138,.55);
+      position:absolute;
+      inset:auto;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      opacity:0;
+    }
+    .ring{
+      position:absolute;
+      top:50%; left:50%;
+      width: 12px; height: 12px;
+      border-radius:999px;
+      border:1px solid rgba(240,210,138,.55);
+      transform: translate(-50%, -50%) scale(0.2);
+      opacity:0;
+      filter: drop-shadow(0 0 18px rgba(240,210,138,.22));
+    }
+    .sparkle{
+      position:absolute;
+      width: 6px; height: 6px;
+      border-radius:999px;
+      background: rgba(240,210,138,.95);
+      box-shadow: 0 0 18px rgba(240,210,138,.65);
+      opacity:0;
+    }
+
+    .modal.show .ringCore{
+      animation: corePop 900ms ease-out 1 both;
+    }
+    .modal.show .ring.r1{ animation: ring 1100ms ease-out 1 both; }
+    .modal.show .ring.r2{ animation: ring 1350ms ease-out 1 both; }
+    .modal.show .ring.r3{ animation: ring 1600ms ease-out 1 both; }
+
+    /* stronger for SS/S */
+    .modal.show.is-top .ring{ border-color: rgba(240,210,138,.75); }
+    .modal.show.is-top .ring.r1{ animation: ringTop 1400ms ease-out 1 both; }
+    .modal.show.is-top .ring.r2{ animation: ringTop 1650ms ease-out 1 both; }
+    .modal.show.is-top .ring.r3{ animation: ringTop 1900ms ease-out 1 both; }
+
+    .modal.show .sparkle.s1{ animation: sparkle 900ms ease-out 1 both; }
+    .modal.show .sparkle.s2{ animation: sparkle 1100ms ease-out 1 both; }
+    .modal.show .sparkle.s3{ animation: sparkle 1300ms ease-out 1 both; }
+    .modal.show .sparkle.s4{ animation: sparkle 1500ms ease-out 1 both; }
+
+    @keyframes corePop{
+      0%{ opacity:0; transform: translate(-50%,-50%) scale(.4); }
+      20%{ opacity:1; transform: translate(-50%,-50%) scale(1.2); }
+      100%{ opacity:0; transform: translate(-50%,-50%) scale(2.2); }
+    }
+    @keyframes ring{
+      0%{ opacity:0; transform: translate(-50%,-50%) scale(.2); }
+      15%{ opacity:.9; }
+      100%{ opacity:0; transform: translate(-50%,-50%) scale(18); }
+    }
+    @keyframes ringTop{
+      0%{ opacity:0; transform: translate(-50%,-50%) scale(.2); }
+      15%{ opacity:1; }
+      100%{ opacity:0; transform: translate(-50%,-50%) scale(24); }
+    }
+    @keyframes sparkle{
+      0%{ opacity:0; transform: translate3d(0,0,0) scale(.9); }
+      20%{ opacity:1; }
+      100%{ opacity:0; transform: translate3d(var(--dx), var(--dy), 0) scale(0); }
+    }
+
+    /* print friendly */
+    @media print{
+      .topbar{ position:relative; }
+      .btn{ display:none; }
+      body{ background:#fff; color:#111; }
+      .card,.heroCard,.prizeWrap{ box-shadow:none; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
-  <h1>2026年の始まりの運試し！</h1>
+  <div class="topbar">
+    <div class="wrap inner">
+      <div class="brand" aria-label="Brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <div class="name">ReMiliss</div>
+          <small class="sub">OMOTESANDO EYEBROW & LASH</small>
+        </div>
+      </div>
 
-  <div class="card">
-    <form id="lotteryForm">
-      <label>抽選コード</label>
-      <input id="ticketCode" placeholder="RM26-XXXX-XXXX" required>
-
-      <label>お名前（予約名 / LINE名）</label>
-      <input id="customerName" required>
-
-      <button type="submit">抽選する</button>
-      <div class="note" id="formNote">※お一人様1回限り</div>
-    </form>
+      <div class="pill" role="note">
+        <span class="dot" aria-hidden="true"></span>
+        2026 PREMIUM LOTTERY
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- ===== 当選表示 ===== -->
-<div class="winModal" id="winModal">
-  <div class="winBox">
-    <div class="winPrize" id="winPrize"></div>
-    <div class="winText">詳細は公式LINEよりご案内します</div>
-    <button class="closeBtn" onclick="closeWin()">閉じる</button>
-  </div>
-</div>
+  <header class="hero">
+    <div class="wrap">
+      <div class="heroCard">
+        <div class="heroInner">
+          <div>
+            <div class="kicker"><span></span> LIMITED CAMPAIGN</div>
+            <h1>2026年の始まりの運試し！</h1>
+            <p class="lead">
+              いつもご来店いただくお客様へ。2026年のスタートを記念して、プレミアム抽選をご用意しました。<br>
+              <b>お一人様1回限り</b>／<b>抽選コード制</b>で、安心してお楽しみいただけます。
+            </p>
 
-<script>
-/* ===== GAS WebアプリURL ===== */
-const API_URL = "https://script.google.com/macros/s/AKfycbynZycvNh9rXCC8Ot7eZKAWd-jaX3wYK_3VxwNQj_c/exec";
+            <div class="metaRow">
+              <div class="chip"><b>参加方法</b>：抽選コードを入力</div>
+              <div class="chip"><b>回数制限</b>：1人1回</div>
+              <div class="chip"><b>当選人数</b>：50名</div>
+            </div>
+          </div>
 
-/* ===== elements ===== */
-const form = document.getElementById("lotteryForm");
-const code = document.getElementById("ticketCode");
-const nameEl = document.getElementById("customerName");
-const note = document.getElementById("formNote");
-const modal = document.getElementById("winModal");
-const winPrize = document.getElementById("winPrize");
-
-/* ===== utils ===== */
-function normalize(v){
-  return v.trim().replace(/\s+/g,"").toUpperCase();
-}
-
-/* ===== JSONP ===== */
-function jsonp(url, params){
-  return new Promise((resolve,reject)=>{
-    const cb="cb_"+Math.random().toString(16).slice(2);
-    const qs=new URLSearchParams({callback:cb,...params}).toString();
-    const s=document.createElement("script");
-    s.src=url+"?"+qs;
-    window[cb]=(data)=>{
-      delete window[cb];
-      s.remove();
-      resolve(data);
-    };
-    s.onerror=()=>reject();
-    document.body.appendChild(s);
-  });
-}
-
-/* ===== submit ===== */
-form.addEventListener("submit", async (e)=>{
-  e.preventDefault();
-
-  const ticket = normalize(code.value);
-  if(!/^RM26-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(ticket)){
-    note.textContent="コード形式が正しくありません";
-    return;
-  }
-
-  note.textContent="抽選中…";
-
-  try{
-    const res = await jsonp(API_URL,{
-      ticket_code: ticket,
-      customer_name: nameEl.value
-    });
-
-    if(!res.ok){
-      note.textContent="このコードは使用できません";
-      return;
-    }
-
-    showWin(res.prize);
-
-  }catch{
-    note.textContent="通信に失敗しました";
-  }
-});
-
-/* ===== modal ===== */
-function showWin(prize){
-  winPrize.textContent = prize + " が当選しました！";
-  modal.classList.add("show");
-}
-function closeWin(){
-  modal.classList.remove("show");
-}
-</script>
-</body>
-</html>
+          <aside class="ctaBox" aria-label="Entry">
+            <h2>エントリー方法</h2>
+            <p>LINE配布の「抽選コード」を入力して抽選。結果はこの画面に表示されます。</p>
+            <div class="ctaActions">
+              <a class="btn btnPrimary" href="#entry">抽選する</a>
