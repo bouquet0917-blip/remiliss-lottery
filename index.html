@@ -1,939 +1,182 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>2026 New Year Lottery｜ReMiliss</title>
-  <meta name="description" content="2026年初回の特別キャンペーン。1人1回限定のプレミアム抽選。" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026年 新年運試し抽選｜ReMiliss</title>
 
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --panel:#111824;
-      --panel2:#0e141f;
-      --text:#e9eef6;
-      --muted:#a8b3c2;
-      --line:rgba(255,255,255,.10);
-      --gold:#d7b46a;
-      --gold2:#f0d28a;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --radius:18px;
-      --radius2:26px;
-      --max:1080px;
-    }
+<style>
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  background:#0b0f14;
+  color:#e9eef6;
+}
+.wrap{max-width:680px;margin:40px auto;padding:0 20px}
+h1{font-size:26px;text-align:center;letter-spacing:.08em}
+.card{
+  background:#111824;
+  border-radius:16px;
+  padding:24px;
+  margin-top:24px;
+}
+label{display:block;margin-top:16px;font-size:13px;color:#a8b3c2}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #333;
+  background:#0e141f;
+  color:#fff;
+  margin-top:6px;
+}
+button{
+  width:100%;
+  margin-top:24px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(180deg,#f0d28a,#d7b46a);
+  font-weight:bold;
+  letter-spacing:.1em;
+}
+.note{margin-top:12px;font-size:12px;color:#a8b3c2;text-align:center}
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 10%, rgba(215,180,106,.18), transparent 55%),
-        radial-gradient(900px 520px at 90% 20%, rgba(240,210,138,.12), transparent 60%),
-        radial-gradient(900px 520px at 40% 95%, rgba(120,160,255,.10), transparent 60%),
-        linear-gradient(180deg, #070a0f 0%, var(--bg) 100%);
-      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
-      letter-spacing:.02em;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
-
-    /* top bar */
-    .topbar{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(180deg, rgba(11,15,20,.92), rgba(11,15,20,.55));
-      border-bottom: 1px solid var(--line);
-    }
-    .topbar .inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-    }
-    .brand{
-      display:flex; gap:12px; align-items:center;
-    }
-    .mark{
-      width:34px; height:34px; border-radius:999px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(240,210,138,.9), rgba(215,180,106,.35) 45%, rgba(215,180,106,.12) 70%, transparent 72%),
-        linear-gradient(135deg, rgba(215,180,106,.65), rgba(240,210,138,.18));
-      box-shadow: 0 10px 30px rgba(215,180,106,.15);
-      border: 1px solid rgba(215,180,106,.35);
-    }
-    .brand .name{
-      font-weight:700;
-      letter-spacing:.08em;
-    }
-    .brand .sub{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.12em;
-      margin-top:2px;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      border: 1px solid rgba(215,180,106,.35);
-      background: rgba(17,24,36,.55);
-      color: var(--gold2);
-      font-size:12px;
-    }
-    .dot{
-      width:6px; height:6px; border-radius:999px;
-      background: var(--gold2);
-      box-shadow: 0 0 18px rgba(240,210,138,.65);
-    }
-
-    /* hero */
-    header.hero{ padding:54px 0 26px; }
-    .heroCard{
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(17,24,36,.82), rgba(14,20,31,.72));
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .heroCard::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(800px 320px at 30% 0%, rgba(240,210,138,.22), transparent 60%),
-        radial-gradient(600px 260px at 80% 15%, rgba(215,180,106,.18), transparent 55%);
-      pointer-events:none;
-    }
-    .heroInner{
-      position:relative;
-      padding:34px 28px 28px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    @media (max-width:860px){ .heroInner{ grid-template-columns:1fr; } }
-
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      color: var(--gold2);
-      font-size:12px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      margin-bottom:12px;
-    }
-    .kicker span{
-      height:1px; width:44px;
-      background: linear-gradient(90deg, rgba(215,180,106,.0), rgba(240,210,138,.75));
-    }
-    h1{
-      margin:0 0 10px;
-      font-family: ui-serif, "Times New Roman", "Noto Serif JP", serif;
-      font-weight:700;
-      letter-spacing:.08em;
-      line-height:1.2;
-      font-size: clamp(26px, 3.2vw, 40px);
-    }
-    .lead{
-      margin:0;
-      color: rgba(233,238,246,.86);
-      line-height:1.8;
-      font-size:14px;
-      max-width: 62ch;
-    }
-    .metaRow{
-      display:flex; flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
-    }
-    .chip{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(11,15,20,.35);
-      padding:9px 12px;
-      border-radius:999px;
-      font-size:12px;
-      color: var(--muted);
-    }
-    .chip b{ color: var(--text); font-weight:700; }
-
-    .ctaBox{
-      position:relative;
-      border-radius: var(--radius);
-      border:1px solid rgba(215,180,106,.30);
-      background: linear-gradient(180deg, rgba(215,180,106,.12), rgba(11,15,20,.35));
-      padding:18px;
-      overflow:hidden;
-    }
-    .ctaBox::after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(340px 180px at 30% 20%, rgba(240,210,138,.26), transparent 60%);
-      pointer-events:none;
-    }
-    .ctaBox h2{
-      margin:0 0 8px;
-      font-size:14px;
-      letter-spacing:.14em;
-      color: var(--gold2);
-      position:relative;
-    }
-    .ctaBox p{
-      margin:0 0 12px;
-      font-size:12px;
-      line-height:1.7;
-      color: rgba(233,238,246,.78);
-      position:relative;
-    }
-    .ctaActions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      position:relative;
-    }
-    .btn{
-      cursor:pointer;
-      border-radius:12px;
-      padding:11px 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(17,24,36,.55);
-      color: var(--text);
-      font-weight:700;
-      letter-spacing:.06em;
-      font-size:13px;
-      transition: transform .15s ease, border-color .15s ease, background .15s ease, opacity .15s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); border-color: rgba(240,210,138,.35); }
-    .btn:disabled{ opacity:.55; cursor:not-allowed; transform:none; }
-    .btnPrimary{
-      border-color: rgba(240,210,138,.55);
-      background: linear-gradient(180deg, rgba(240,210,138,.22), rgba(215,180,106,.10));
-      color: var(--text);
-    }
-    .btnGhost{ background: transparent; }
-
-    /* sections */
-    section{ padding: 18px 0 26px; }
-    .grid2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-    }
-    @media (max-width:860px){ .grid2{ grid-template-columns:1fr; } }
-
-    .card{
-      background: linear-gradient(180deg, rgba(17,24,36,.72), rgba(14,20,31,.62));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 14px 46px rgba(0,0,0,.32);
-    }
-    .card h3{
-      margin:0 0 10px;
-      font-size:14px;
-      letter-spacing:.14em;
-      color: var(--gold2);
-    }
-    .card p, .card li{
-      color: rgba(233,238,246,.84);
-      font-size:13px;
-      line-height:1.85;
-    }
-    .muted{ color: var(--muted); }
-
-    /* prize table */
-    .prizeWrap{
-      border-radius: var(--radius2);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(17,24,36,.78), rgba(14,20,31,.62));
-      box-shadow: var(--shadow);
-    }
-    .prizeHead{
-      padding:18px 18px 16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:10px; flex-wrap:wrap;
-    }
-    .prizeHead h2{
-      margin:0;
-      font-family: ui-serif, "Times New Roman", "Noto Serif JP", serif;
-      letter-spacing:.10em;
-      font-size:18px;
-    }
-    .prizeHead .note{
-      font-size:12px;
-      color: var(--muted);
-    }
-
-    .prizeGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:1px;
-      background: rgba(255,255,255,.06);
-    }
-    @media (max-width:980px){ .prizeGrid{ grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width:640px){ .prizeGrid{ grid-template-columns: 1fr; } }
-
-    .prize{
-      background: rgba(11,15,20,.38);
-      padding:16px 16px 14px;
-      position:relative;
-      min-height: 132px;
-    }
-    .prize::before{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(340px 180px at 20% 0%, rgba(240,210,138,.10), transparent 60%);
-      pointer-events:none;
-      opacity:.85;
-    }
-    .prizeTop{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      position:relative;
-    }
-    .rank{
-      display:inline-flex; align-items:center; gap:10px;
-      font-weight:800;
-      letter-spacing:.16em;
-      font-size:13px;
-    }
-    .rankBadge{
-      width:30px; height:30px;
-      display:grid; place-items:center;
-      border-radius:10px;
-      border:1px solid rgba(215,180,106,.40);
-      background: linear-gradient(180deg, rgba(240,210,138,.16), rgba(215,180,106,.08));
-      color: var(--gold2);
-      box-shadow: 0 10px 26px rgba(215,180,106,.12);
-      font-family: ui-serif, "Times New Roman", serif;
-      letter-spacing:.08em;
-    }
-    .qty{
-      font-size:12px;
-      color: var(--muted);
-      border:1px solid rgba(255,255,255,.10);
-      padding:7px 10px;
-      border-radius:999px;
-      background: rgba(17,24,36,.35);
-      position:relative;
-      white-space:nowrap;
-    }
-    .prizeBody{
-      margin-top:10px;
-      position:relative;
-    }
-    .prizeTitle{
-      margin:0 0 6px;
-      font-weight:800;
-      letter-spacing:.06em;
-      font-size:14px;
-    }
-    .prizeDesc{
-      margin:0;
-      color: rgba(233,238,246,.78);
-      font-size:12px;
-      line-height:1.8;
-    }
-
-    /* ===== PRIZE 強調（SS/S） ===== */
-    .prize--top{
-      border: 1px solid rgba(240,210,138,.38);
-      background: linear-gradient(180deg, rgba(240,210,138,.10), rgba(11,15,20,.42));
-      min-height: 156px;
-    }
-    .prize--top::before{
-      opacity: 1;
-      background: radial-gradient(380px 200px at 25% 0%, rgba(240,210,138,.22), transparent 62%);
-    }
-    .prize--top .prizeTitle{ font-size: 15px; letter-spacing:.08em; }
-    .prize--top .rank{ font-size: 14px; }
-    .rankBadge--top{
-      width: 36px; height: 36px; border-radius: 12px;
-      border-color: rgba(240,210,138,.55);
-      box-shadow: 0 14px 34px rgba(240,210,138,.16);
-    }
-
-    /* ===== I賞 控えめ ===== */
-    .prize--subtle{
-      opacity: .88;
-      background: rgba(11,15,20,.28);
-    }
-    .rankBadge--subtle{
-      border-color: rgba(255,255,255,.14);
-      color: rgba(233,238,246,.85);
-      background: rgba(17,24,36,.35);
-      box-shadow: none;
-    }
-
-    /* entry form */
-    .form{
-      display:grid;
-      gap:12px;
-      margin-top:10px;
-    }
-    label{
-      display:grid;
-      gap:6px;
-      font-size:12px;
-      color: var(--muted);
-      letter-spacing:.08em;
-    }
-    input, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(11,15,20,.45);
-      color: var(--text);
-      outline:none;
-      font-size:14px;
-      transition: border-color .15s ease, box-shadow .15s ease;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(240,210,138,.45);
-      box-shadow: 0 0 0 4px rgba(240,210,138,.10);
-    }
-    textarea{ min-height: 92px; resize: vertical; }
-
-    .fine{
-      font-size:11px;
-      color: rgba(168,179,194,.90);
-      line-height:1.7;
-    }
-    .divider{
-      height:1px;
-      background: rgba(255,255,255,.08);
-      margin: 12px 0;
-    }
-
-    footer{
-      padding: 28px 0 44px;
-      color: rgba(168,179,194,.88);
-      font-size:12px;
-      line-height:1.8;
-    }
-    .footRow{
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
-      border-top:1px solid rgba(255,255,255,.08);
-      padding-top:16px;
-    }
-
-    /* ===== SS/S 当選演出モーダル ===== */
-    .winModal{
-      position: fixed; inset: 0;
-      display: none;
-      place-items: center;
-      background: rgba(0,0,0,.68);
-      z-index: 9999;
-      backdrop-filter: blur(10px);
-    }
-    .winModal.is-open{ display: grid; }
-
-    .winCard{
-      width: min(560px, calc(100% - 28px));
-      border-radius: 22px;
-      border: 1px solid rgba(240,210,138,.45);
-      background: linear-gradient(180deg, rgba(17,24,36,.92), rgba(11,15,20,.82));
-      box-shadow: 0 24px 90px rgba(0,0,0,.55);
-      overflow: hidden;
-      position: relative;
-    }
-    .winCard::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 260px at 30% 10%, rgba(240,210,138,.30), transparent 60%),
-        radial-gradient(420px 220px at 80% 20%, rgba(215,180,106,.22), transparent 62%);
-      pointer-events:none;
-    }
-    .winInner{
-      position: relative;
-      padding: 22px 22px 18px;
-      text-align: center;
-    }
-    .winKicker{
-      display:inline-flex; align-items:center; gap:10px;
-      color: var(--gold2);
-      letter-spacing: .18em;
-      font-size: 12px;
-      margin: 10px 0 8px;
-    }
-    .winTitle{
-      margin: 0;
-      font-family: ui-serif, "Times New Roman", "Noto Serif JP", serif;
-      font-weight: 800;
-      letter-spacing:.10em;
-      font-size: clamp(22px, 3.2vw, 30px);
-    }
-    .winPrize{
-      margin: 10px 0 0;
-      font-weight: 800;
-      letter-spacing:.06em;
-      font-size: 16px;
-    }
-    .winSub{
-      margin: 8px 0 0;
-      color: rgba(233,238,246,.82);
-      font-size: 12px;
-      line-height: 1.7;
-    }
-    .winActions{
-      display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
-      padding: 0 18px 18px;
-    }
-    .sparkle{
-      position:absolute; inset:0;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(240,210,138,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 30% 70%, rgba(240,210,138,.75) 0 1.6px, transparent 2.6px),
-        radial-gradient(circle at 70% 30%, rgba(215,180,106,.85) 0 2px, transparent 3px),
-        radial-gradient(circle at 90% 80%, rgba(240,210,138,.70) 0 1.8px, transparent 2.8px);
-      opacity: .18;
-      animation: sparkleMove 1.6s ease-in-out infinite alternate;
-      pointer-events:none;
-    }
-    @keyframes sparkleMove{
-      from{ transform: translateY(-6px); opacity:.14; }
-      to{ transform: translateY(6px); opacity:.22; }
-    }
-
-    /* print friendly */
-    @media print{
-      .topbar{ position:relative; }
-      .btn{ display:none; }
-      body{ background:#fff; color:#111; }
-      .card,.heroCard,.prizeWrap{ box-shadow:none; }
-    }
-  </style>
+/* ===== 当選モーダル ===== */
+.winModal{
+  position:fixed;inset:0;
+  display:none;
+  place-items:center;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(6px);
+}
+.winModal.show{display:grid}
+.winBox{
+  background:#111824;
+  border-radius:20px;
+  padding:32px;
+  text-align:center;
+  width:90%;max-width:420px;
+  position:relative;
+}
+.winBox::before{
+  content:"";
+  position:absolute;inset:-2px;
+  border-radius:22px;
+  background:radial-gradient(circle,#f0d28a33,transparent 60%);
+}
+.winPrize{font-size:22px;font-weight:bold;letter-spacing:.1em}
+.winText{margin-top:10px;font-size:14px;color:#d7b46a}
+.closeBtn{
+  margin-top:20px;
+  background:none;
+  border:1px solid #555;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:20px;
+}
+</style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="wrap inner">
-      <div class="brand" aria-label="Brand">
-        <div class="mark" aria-hidden="true"></div>
-        <div>
-          <div class="name">ReMiliss</div>
-          <small class="sub">OMOTESANDO EYEBROW & LASH</small>
-        </div>
-      </div>
+<div class="wrap">
+  <h1>2026年の始まりの運試し！</h1>
 
-      <div class="pill" role="note">
-        <span class="dot" aria-hidden="true"></span>
-        2026 NEW YEAR LOTTERY
-      </div>
-    </div>
+  <div class="card">
+    <form id="lotteryForm">
+      <label>抽選コード</label>
+      <input id="ticketCode" placeholder="RM26-XXXX-XXXX" required>
+
+      <label>お名前（予約名 / LINE名）</label>
+      <input id="customerName" required>
+
+      <button type="submit">抽選する</button>
+      <div class="note" id="formNote">※お一人様1回限り</div>
+    </form>
   </div>
+</div>
 
-  <header class="hero">
-    <div class="wrap">
-      <div class="heroCard">
-        <div class="heroInner">
-          <div>
-            <div class="kicker"><span></span> LIMITED CAMPAIGN</div>
-            <h1>2026年の始まりの<br>運試し！</h1>
-            <p class="lead">
-              いつもご来店いただくお客様へ。新年の特別抽選をご用意しました。<br>
-              <b>お一人様1回限り</b>／抽選コードは<b>未使用のみ有効</b>です。
-            </p>
-
-            <div class="metaRow">
-              <div class="chip"><b>参加条件</b>：対象者へ抽選コード配布</div>
-              <div class="chip"><b>回数制限</b>：1人1回</div>
-              <div class="chip"><b>方式</b>：コード照合（重複不可）</div>
-            </div>
-          </div>
-
-          <aside class="ctaBox" aria-label="Entry">
-            <h2>エントリー方法</h2>
-            <p>LINE配布の「抽選コード」を入力して送信。結果は画面に表示され、詳細は公式LINEでご案内します。</p>
-            <div class="ctaActions">
-              <a class="btn btnPrimary" href="#entry">抽選コードを入力</a>
-              <a class="btn btnGhost" href="#prizes">賞品一覧を見る</a>
-            </div>
-            <div class="divider"></div>
-            <div class="fine">
-              ※ SS賞・S賞が当選した場合のみ、豪華演出が表示されます。
-            </div>
-          </aside>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section id="prizes">
-      <div class="wrap">
-        <div class="prizeWrap">
-          <div class="prizeHead">
-            <div>
-              <h2>PRIZE LINEUP</h2>
-              <div class="note">SS賞 / S賞 / A賞 / B賞 / C賞 / D賞 / E賞 / F賞 / G賞 / H賞 / I賞</div>
-            </div>
-            <div class="note">※当選人数は合計50名</div>
-          </div>
-
-          <div class="prizeGrid" role="list">
-            <!-- SS -->
-            <div class="prize prize--top prize--ss" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge rankBadge--top">SS</span> SS賞</div>
-                <div class="qty">当選：1名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">ReFa アイロン</p>
-                <p class="prizeDesc">最上位の運試し。上質を引き寄せる一本。</p>
-              </div>
-            </div>
-
-            <!-- S -->
-            <div class="prize prize--top prize--s" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge rankBadge--top">S</span> S賞</div>
-                <div class="qty">当選：1名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">ReFa 美顔器</p>
-                <p class="prizeDesc">肌印象を底上げ。人気美容ギア。</p>
-              </div>
-            </div>
-
-            <!-- A -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">A</span> A賞</div>
-                <div class="qty">当選：2名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">ラッシュアディクト</p>
-                <p class="prizeDesc">結果重視の方へ。存在感を底上げ。</p>
-              </div>
-            </div>
-
-            <!-- B -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">B</span> B賞</div>
-                <div class="qty">当選：3名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">美容鍼入りファンデーション</p>
-                <p class="prizeDesc">メイクしながら上質ケア。</p>
-              </div>
-            </div>
-
-            <!-- C -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">C</span> C賞</div>
-                <div class="qty">当選：3名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">エグータム</p>
-                <p class="prizeDesc">根元からケアして土台を整える。</p>
-              </div>
-            </div>
-
-            <!-- D -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">D</span> D賞</div>
-                <div class="qty">当選：3名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">My lamination リフトマスカラ</p>
-                <p class="prizeDesc">カール＆束感を美しくキープ。</p>
-              </div>
-            </div>
-
-            <!-- E -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">E</span> E賞</div>
-                <div class="qty">当選：3名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">My lamination 美容液</p>
-                <p class="prizeDesc">毎日のホームケアを格上げ。</p>
-              </div>
-            </div>
-
-            <!-- F -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">F</span> F賞</div>
-                <div class="qty">当選：5名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">美容鍼入りハンドクリーム</p>
-                <p class="prizeDesc">手元のうるおいと上質感。</p>
-              </div>
-            </div>
-
-            <!-- G -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">G</span> G賞</div>
-                <div class="qty">当選：5名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">ペンシル</p>
-                <p class="prizeDesc">毎日の眉メイクに使える一本。</p>
-              </div>
-            </div>
-
-            <!-- H -->
-            <div class="prize" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge">H</span> H賞</div>
-                <div class="qty">当選：5名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">まつ毛コーティング剤</p>
-                <p class="prizeDesc">カールを守り、束感をキープ。</p>
-              </div>
-            </div>
-
-            <!-- I (subtle) -->
-            <div class="prize prize--subtle prize--i" role="listitem">
-              <div class="prizeTop">
-                <div class="rank"><span class="rankBadge rankBadge--subtle">I</span> I賞</div>
-                <div class="qty">当選：14名</div>
-              </div>
-              <div class="prizeBody">
-                <p class="prizeTitle">次回 ¥500 OFF</p>
-                <p class="prizeDesc">次回ご来店時にご利用いただけます（期限あり）。</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap grid2">
-        <div class="card">
-          <h3>HOW IT WORKS（不正防止の考え方）</h3>
-          <ul>
-            <li><b>抽選コードは個別発行</b>（例：RM26-AB12-CD34）</li>
-            <li><b>使用済みフラグ</b>で重複応募をブロック（GAS＋スプレッドシートで管理）</li>
-            <li>応募時に<b>ご予約名 / LINE表示名</b>を記録（必要なら電話末尾で照合も可能）</li>
-            <li>SS賞・S賞のみ、結果表示が<b>豪華演出</b>になります</li>
-          </ul>
-          <p class="fine">
-            ※ このページはGAS接続で「コード存在チェック」「使用済み判定」「当選人数固定（在庫方式）」を行います。
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>RECOMMENDED（運用のコツ）</h3>
-          <ul>
-            <li>コード配布は「来店時」「LINE限定」など<b>配布経路を固定</b></li>
-            <li>当選特典は<b>期限</b>を設定（例：当選通知から30日）</li>
-            <li>I賞（¥500 OFF）は<b>次回来店メリット</b>として自然に案内</li>
-            <li>（任意）照合を強めたい場合は、シートE列に<b>電話末尾4桁</b>を入れて運用</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="entry">
-      <div class="wrap grid2">
-        <div class="card">
-          <h3>ENTRY（抽選エントリー）</h3>
-
-          <form class="form" id="lotteryForm" action="#" method="post" novalidate>
-            <label>
-              抽選コード（必須）
-              <input id="ticketCode" name="ticket_code" inputmode="latin" autocomplete="off"
-                     placeholder="例：RM26-AB12-CD34" required />
-            </label>
-
-            <label>
-              ご予約名 or LINE表示名（必須）
-              <input id="customerName" name="customer_name" autocomplete="name"
-                     placeholder="例：田代 太郎 / LINE：TARO" required />
-            </label>
-
-            <label>
-              照合用（電話番号下4桁など）（任意）
-              <input id="verifyHint" name="verify_hint" inputmode="numeric" autocomplete="off"
-                     placeholder="例：1234" />
-            </label>
-
-            <label>
-              メモ（任意）
-              <textarea name="note" placeholder="例：当選連絡はLINE希望、など"></textarea>
-            </label>
-
-            <button class="btn btnPrimary" type="submit">エントリー送信</button>
-
-            <div class="fine" id="formNote">
-              ・エントリーは<b>お一人様1回限り</b>です。<br>
-              ・同一コードの重複応募は無効となります。<br>
-              ・当選結果は画面に表示され、詳細は公式LINEよりご案内いたします。
-            </div>
-          </form>
-        </div>
-
-        <div class="card">
-          <h3>TERMS（注意事項）</h3>
-          <ul>
-            <li>本キャンペーンは、対象者へ配布された抽選コードをお持ちの方が参加できます。</li>
-            <li>応募はお一人様1回まで。複数アカウント・複数名義での応募が判明した場合は無効となります。</li>
-            <li>当選権利の譲渡・換金はできません。</li>
-            <li>当選特典には利用期限があります（期限は店舗よりご案内）。</li>
-            <li>内容は予告なく変更となる場合があります。</li>
-          </ul>
-          <div class="divider"></div>
-          <p class="fine">
-            <b>スタッフ向け（運用メモ）</b><br>
-            ・コード管理：unused / used / void の3状態。<br>
-            ・抽選人数は在庫方式で固定（合計50名）。<br>
-            ・抽選をやり直す場合はGASの resetInventory() を実行。
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div class="footRow">
-        <div>© ReMiliss / Omotesando</div>
-        <div class="muted">Premium Lottery Page (HTML/CSS/JS + GAS)</div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- SS/S当選演出モーダル -->
-  <div class="winModal" id="winModal" aria-hidden="true">
-    <div class="winCard" role="dialog" aria-modal="true" aria-label="当選結果">
-      <div class="sparkle" aria-hidden="true"></div>
-      <div class="winInner">
-        <div class="winKicker">SPECIAL WINNER</div>
-        <h2 class="winTitle" id="winTitle">おめでとうございます</h2>
-        <div class="winPrize" id="winPrize">SS賞</div>
-        <p class="winSub" id="winSub">詳細は公式LINEよりご案内いたします。</p>
-      </div>
-      <div class="winActions">
-        <button class="btn btnPrimary" id="winCloseBtn" type="button">閉じる</button>
-      </div>
-    </div>
+<!-- ===== 当選表示 ===== -->
+<div class="winModal" id="winModal">
+  <div class="winBox">
+    <div class="winPrize" id="winPrize"></div>
+    <div class="winText">詳細は公式LINEよりご案内します</div>
+    <button class="closeBtn" onclick="closeWin()">閉じる</button>
   </div>
+</div>
 
-  <script>
-    // =============================
-    // 1) ここにGAS WebアプリURLを入れてください
-    // =============================
-   const API_URL = "https://script.google.com/macros/s/AKfycbyygLLWDAFWuh7xN4c2TCLjOBf8prEhzBdD4HYPn8lwd6rZZqqpCPP3oMErJYA0Knth/exec";
+<script>
+/* ===== GAS WebアプリURL ===== */
+const API_URL = "https://script.google.com/macros/s/AKfycbynZycvNh9rXCC8Ot7eZKAWd-jaX3wYK_3VxwNQj_c/exec";
 
+/* ===== elements ===== */
+const form = document.getElementById("lotteryForm");
+const code = document.getElementById("ticketCode");
+const nameEl = document.getElementById("customerName");
+const note = document.getElementById("formNote");
+const modal = document.getElementById("winModal");
+const winPrize = document.getElementById("winPrize");
 
-    // elements
-    const form = document.getElementById("lotteryForm");
-    const code = document.getElementById("ticketCode");
-    const nameEl = document.getElementById("customerName");
-    const hintEl = document.getElementById("verifyHint");
-    const note = document.getElementById("formNote");
+/* ===== utils ===== */
+function normalize(v){
+  return v.trim().replace(/\s+/g,"").toUpperCase();
+}
 
-    // modal
-    const modal = document.getElementById("winModal");
-    const winPrize = document.getElementById("winPrize");
-    const winCloseBtn = document.getElementById("winCloseBtn");
+/* ===== JSONP ===== */
+function jsonp(url, params){
+  return new Promise((resolve,reject)=>{
+    const cb="cb_"+Math.random().toString(16).slice(2);
+    const qs=new URLSearchParams({callback:cb,...params}).toString();
+    const s=document.createElement("script");
+    s.src=url+"?"+qs;
+    window[cb]=(data)=>{
+      delete window[cb];
+      s.remove();
+      resolve(data);
+    };
+    s.onerror=()=>reject();
+    document.body.appendChild(s);
+  });
+}
 
-    function normalizeCode(v){
-      return (v || "")
-        .trim()
-        .replace(/\s+/g, "")
-        .replace(/[ー—–]/g, "-")
-        .toUpperCase();
+/* ===== submit ===== */
+form.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+
+  const ticket = normalize(code.value);
+  if(!/^RM26-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(ticket)){
+    note.textContent="コード形式が正しくありません";
+    return;
+  }
+
+  note.textContent="抽選中…";
+
+  try{
+    const res = await jsonp(API_URL,{
+      ticket_code: ticket,
+      customer_name: nameEl.value
+    });
+
+    if(!res.ok){
+      note.textContent="このコードは使用できません";
+      return;
     }
 
-    function isTopPrize(prize){
-      return prize === "SS賞" || prize === "S賞";
-    }
+    showWin(res.prize);
 
-    function openWinModal(prizeText){
-      winPrize.textContent = `${prizeText} が当選しました`;
-      modal.classList.add("is-open");
-      modal.setAttribute("aria-hidden", "false");
-    }
-    function closeWinModal(){
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden", "true");
-    }
-    winCloseBtn.addEventListener("click", closeWinModal);
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeWinModal(); });
-
-    function showResult(prize){
-      note.innerHTML =
-        `確認OK：<b>${prize}</b> が当選しました。<br>詳細は公式LINEよりご案内します。`;
-      if (isTopPrize(prize)) openWinModal(prize);
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      code.value = normalizeCode(code.value);
-
-      // format check
-      const okFormat = /^RM26-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code.value);
-      if(!code.value || !okFormat){
-        note.innerHTML =
-          "・抽選コードの形式をご確認ください（例：<b>RM26-AB12-CD34</b>）。";
-        code.focus();
-        return;
-      }
-
-      const btn = form.querySelector("button[type='submit']");
-      btn.disabled = true;
-      btn.textContent = "確認中…";
-
-      try {
-        const res = await fetch(API_URL, {
-  method: "POST",
-  mode: "no-cors",
-  body: JSON.stringify({
-    ticket_code: code.value,
-    customer_name: nameEl.value,
-    verify_hint: hintEl.value
-  })
+  }catch{
+    note.textContent="通信に失敗しました";
+  }
 });
 
-
-        // no-cors の場合、レスポンスは読めないので
-// 成功＝GAS側で処理された前提で進める
-showResult("抽選結果は公式LINEでご案内します");
-return;
-
-
-        if (!data.ok) {
-          const msgMap = {
-            missing_fields: "必須項目が未入力です。",
-            sheet_missing: "設定エラー（シート未作成）です。店舗へご連絡ください。",
-            not_found: "このコードは存在しません。入力をご確認ください。",
-            already_used: "このコードは既に使用済みです（1人1回限り）。",
-            void: "このコードは無効です。店舗へご連絡ください。",
-            hint_mismatch: "照合情報が一致しません。入力をご確認ください。",
-            sold_out: "本抽選は終了しました（上限に達しました）。",
-            server_error: "現在混み合っています。時間をおいて再度お試しください。"
-          };
-          note.innerHTML = msgMap[data.reason] || "確認に失敗しました。";
-          btn.disabled = false;
-          btn.textContent = "エントリー送信";
-          return;
-        }
-
-        btn.textContent = "送信完了";
-        showResult(data.prize);
-
-      } catch (err) {
-        note.innerHTML =
-          "通信に失敗しました。電波状況をご確認のうえ再度お試しください。";
-        btn.disabled = false;
-        btn.textContent = "エントリー送信";
-      }
-    });
-  </script>
+/* ===== modal ===== */
+function showWin(prize){
+  winPrize.textContent = prize + " が当選しました！";
+  modal.classList.add("show");
+}
+function closeWin(){
+  modal.classList.remove("show");
+}
+</script>
 </body>
 </html>
