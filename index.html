@@ -891,17 +891,22 @@
 
       try {
         const res = await fetch(API_URL, {
-          method: "POST",
-          // GASは text/plain が安定（プリフライト回避しやすい）
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            ticket_code: code.value,
-            customer_name: nameEl.value,
-            verify_hint: hintEl.value
-          })
-        });
+  method: "POST",
+  mode: "no-cors",
+  body: JSON.stringify({
+    ticket_code: code.value,
+    customer_name: nameEl.value,
+    verify_hint: hintEl.value
+  })
+});
+
 
         const data = await res.json();
+        // no-cors の場合、レスポンスは読めないので
+// 成功＝GAS側で処理された前提で進める
+showResult("抽選結果は公式LINEでご案内します");
+return;
+
 
         if (!data.ok) {
           const msgMap = {
